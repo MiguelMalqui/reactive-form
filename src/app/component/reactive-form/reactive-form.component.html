@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Deducción fiscal de plan de pensiones</h1>
+    <form [formGroup]="myForm" rm="ngForm" (ngSubmit)="calculateTaxDeduction()">
+        <div class="mb-3">
+            <label class="form-label" for="tax-base">Base imponible:</label><br>
+            <input type="number" id="tax-base" formControlName="taxBase">
+            <div *ngIf="myForm.get('taxBase')?.touched && myForm.get('taxBase')?.errors?.['required']" class="alert alert-danger">Base imponible requerida</div>
+            <div *ngIf="myForm.get('taxBase')?.touched && myForm.get('taxBase')?.errors?.['min']" class="alert alert-danger">Base imponible debe ser como minimo 0</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="individual-pension-plan">Plan de pensiones individual:</label><br>
+            <input type="number" id="individual-pension-plan" formControlName="individualPensionPlan">
+            <div *ngIf="myForm.get('individualPensionPlan')?.touched && myForm.get('individualPensionPlan')?.errors?.['required']" class="alert alert-danger">Plan de pensiones individual requerido</div>
+            <div *ngIf="myForm.get('individualPensionPlan')?.touched && myForm.get('individualPensionPlan')?.errors?.['min']" class="alert alert-danger">Plan de pensiones individual debe ser como minimo 0</div>
+            <div *ngIf="myForm.get('individualPensionPlan')?.touched && myForm.get('individualPensionPlan')?.errors?.['max']" class="alert alert-danger">Plan de pensiones individual debe ser como maximo 1500</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="company-pension-plan">Plan de pensiones empresarial:</label><br>
+            <input type="number" id="company-pension-plan" formControlName="companyPensionPlan">
+            <div *ngIf="myForm.get('companyPensionPlan')?.touched && myForm.get('companyPensionPlan')?.errors?.['required']" class="alert alert-danger">Plan de pensiones empresarial requerid0</div>
+            <div *ngIf="myForm.get('companyPensionPlan')?.touched && myForm.get('companyPensionPlan')?.errors?.['min']" class="alert alert-danger">Plan de pensiones empresarial debe ser como minimo 0</div>
+            <div *ngIf="myForm.get('companyPensionPlan')?.touched && myForm.get('companyPensionPlan')?.errors?.['max']" class="alert alert-danger">Plan de pensiones empresarial debe ser como maximo 8500</div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Calcular</button>
+    </form>
+    <div class="mt-3">
+        <p>Deducción fiscal = {{taxDeduction}} €</p>
+    </div>
+</div>
